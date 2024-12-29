@@ -28,12 +28,12 @@ export default function Sidebar({
     const allClosed = !isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6;
     
     // Toggle all sections to the opposite state
-    setIsOpen1(prev => allClosed ? true : false);
-    setIsOpen2(prev => allClosed ? true : false);
-    setIsOpen3(prev => allClosed ? true : false);
-    setIsOpen4(prev => allClosed ? true : false);
-    setIsOpen5(prev => allClosed ? true : false);
-    setIsOpen6(prev => allClosed ? true : false);
+    setIsOpen1(allClosed ? true : false);
+    setIsOpen2(allClosed ? true : false);
+    setIsOpen3(allClosed ? true : false);
+    setIsOpen4(allClosed ? true : false);
+    setIsOpen5(allClosed ? true : false);
+    setIsOpen6(allClosed ? true : false);
   }
 
   // const t = useTranslations("HomePage");
