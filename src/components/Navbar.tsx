@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 const Navbar = ({ children }: { children: React.ReactNode }) => {
   const [selectedLanguage, setSelectedLanguage] = useState("kr");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLanguage = e.target.value;

@@ -34,7 +34,7 @@ export default function Sidebar({
 
   // const t = useTranslations("HomePage");
 
-  const { t, i18n } = useTranslation();
+  const { t} = useTranslation();
 
 
 
