@@ -1,1 +1,11 @@
 https://github.com/Leejoongjae123/reacti18next.git
+
+피그마
+https://www.figma.com/design/JudyZZ45ymGRYgO7RLtAEk/%EB%A9%94%EB%89%B4%EC%96%BC-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0-1&t=cSJxLf2k1XFLJTVC-1
+
+요청사항
+언어 지원: 한국어, 일본어, 영어
+페이지 진입점 : 특정 링크 혹은 버튼 클릭시 해당 페이지 열리도록 할 예정
+수정 가능 횟수 : 2회 희망
+참고 사항 : 유씨웨어 메뉴얼(word 파일)을 인딥 측에서 HTML파일로 변환하여 콘텐츠 영역에 삽입
+확장성 및 유지보수 편의성을 고려한 개발 부탁드립니다.

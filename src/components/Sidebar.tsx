@@ -24,12 +24,16 @@ export default function Sidebar({
   const [isOpen5, setIsOpen5] = useState(true);
   const [isOpen6, setIsOpen6] = useState(true);
   const handleAllClose = () => {
-    setIsOpen1(false);
-    setIsOpen2(false);
-    setIsOpen3(false);
-    setIsOpen4(false);
-    setIsOpen5(false);
-    setIsOpen6(false);
+    // Check if all sections are currently closed
+    const allClosed = !isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6;
+    
+    // Toggle all sections to the opposite state
+    setIsOpen1(prev => allClosed ? true : false);
+    setIsOpen2(prev => allClosed ? true : false);
+    setIsOpen3(prev => allClosed ? true : false);
+    setIsOpen4(prev => allClosed ? true : false);
+    setIsOpen5(prev => allClosed ? true : false);
+    setIsOpen6(prev => allClosed ? true : false);
   }
 
   // const t = useTranslations("HomePage");
@@ -68,7 +72,11 @@ export default function Sidebar({
           <Divider className="" />
           </div>
           
-          <Button variant="light" className="text-sm" onClick={handleAllClose}>{t("fold_all")}</Button>
+          <Button variant="light" className="text-sm" onClick={handleAllClose}>
+            {(!isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6) 
+              ? t("expand_all") 
+              : t("fold_all")}
+          </Button>
           
           <div className="space-y-2 px-4">
             <div>

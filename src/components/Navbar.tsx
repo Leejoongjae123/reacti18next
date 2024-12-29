@@ -98,7 +98,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           // setSelectedLanguage={setSelectedLanguage}
         />
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-grow">{children}</main>
       </div>
     </div>
   );
