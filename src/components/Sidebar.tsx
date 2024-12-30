@@ -23,9 +23,19 @@ export default function Sidebar({
   const [isOpen4, setIsOpen4] = useState(true);
   const [isOpen5, setIsOpen5] = useState(true);
   const [isOpen6, setIsOpen6] = useState(true);
+  const [isOpen7, setIsOpen7] = useState(true);
+  const [isOpen8, setIsOpen8] = useState(true);
+  const [isOpen9, setIsOpen9] = useState(true);
+  const [isOpen10, setIsOpen10] = useState(true);
+  const [isOpen11, setIsOpen11] = useState(true);
+  const [isOpen12, setIsOpen12] = useState(true);
+  const [isOpen13, setIsOpen13] = useState(true);
+  const [isOpen14, setIsOpen14] = useState(true);
+
+
   const handleAllClose = () => {
     // Check if all sections are currently closed
-    const allClosed = !isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6;
+    const allClosed = !isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6 && !isOpen7 && !isOpen8 && !isOpen9 && !isOpen10 && !isOpen11 && !isOpen12 && !isOpen13 && !isOpen14;
     
     // Toggle all sections to the opposite state
     setIsOpen1(allClosed ? true : false);
@@ -34,6 +44,14 @@ export default function Sidebar({
     setIsOpen4(allClosed ? true : false);
     setIsOpen5(allClosed ? true : false);
     setIsOpen6(allClosed ? true : false);
+    setIsOpen7(allClosed ? true : false);
+    setIsOpen8(allClosed ? true : false);
+    setIsOpen9(allClosed ? true : false);
+    setIsOpen10(allClosed ? true : false);
+    setIsOpen11(allClosed ? true : false);
+    setIsOpen12(allClosed ? true : false);
+    setIsOpen13(allClosed ? true : false);
+    setIsOpen14(allClosed ? true : false);
   }
 
   // const t = useTranslations("HomePage");
@@ -54,8 +72,8 @@ export default function Sidebar({
       <aside
         className={`
         fixed lg:static top-0 bg-white border-r border-gray-200 transition-all duration-300 ease-in-out
-        h-screen lg:h-[calc(100vh-73px)]
-        ${isSidebarOpen ? "w-[20vw]" : "w-0"}
+        h-full ]
+        ${isSidebarOpen ? "w-[30vw]" : "w-0"}
         lg:block
         ${isSidebarOpen ? "z-30 lg:z-0" : ""}
         overflow-y-auto scrollbar-hide
@@ -164,6 +182,62 @@ export default function Sidebar({
                 <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu6_1")}</div>
                 <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu6_2")}</div>
                 <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu6_3")}</div>
+              </div>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen7(!isOpen7)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                  <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen7 ? 'transform rotate-180' : ''}`} />
+                <span className="text-medium flex-grow ml-2 font-bold">{t("menu7")}</span>
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen8(!isOpen8)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                  <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen8 ? 'transform rotate-180' : ''}`} />
+                <span className="text-medium flex-grow ml-2 font-bold">{t("menu8")}</span>
+              </button>
+              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen6 ? 'max-h-40 ' : 'max-h-0'}`}>
+                
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_1")}</div>
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_2")}</div>
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_3")}</div>
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_4")}</div>
+              </div>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen9(!isOpen9)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen10(!isOpen10)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen11(!isOpen11)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                
+              </button>
+              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen6 ? 'max-h-40 ' : 'max-h-0'}`}>
+                
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu11_1")}</div>
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu11_2")}</div>
+                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu11_3")}</div>
+                
               </div>
             </div>
             

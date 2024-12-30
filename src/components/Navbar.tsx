@@ -23,7 +23,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-screen">
       <nav className="white p-4 border-b border-gray-200">
         <div className="mx-auto flex justify-between items-center px-5">
           <div className="flex items-center justify-center gap-x-2">
@@ -90,15 +90,12 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </nav>
-      <div className="flex">
+      <div className="flex h-[calc(100vh-73px)]">
         <Sidebar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
-          // selectedLanguage={selectedLanguage}
-          // setSelectedLanguage={setSelectedLanguage}
         />
-
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow h-full overflow-y-auto">{children}</main>
       </div>
     </div>
   );
