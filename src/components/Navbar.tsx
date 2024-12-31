@@ -33,6 +33,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
+  
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLanguage = e.target.value;
     setSelectedLanguage(newLanguage);
