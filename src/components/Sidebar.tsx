@@ -99,7 +99,7 @@ export default function Sidebar({
         className={`
         fixed lg:static top-0 bg-white border-r border-gray-200 transition-all duration-300 ease-in-out
         h-full ]
-        ${isSidebarOpen ? "w-[20vw]" : "w-0"}
+        ${isSidebarOpen ? "w-[80vw] md:w-[20vw]" : "w-0"}
         lg:block
         ${isSidebarOpen ? "z-30 lg:z-0" : ""}
         overflow-y-auto scrollbar-hide

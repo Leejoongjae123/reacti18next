@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import setLanguageValue from "@/actions/set-language-action";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Select, SelectItem, Image } from "@nextui-org/react";
@@ -11,12 +11,27 @@ import korea from "../assets/kr.png";
 import en from "../assets/en.png";
 import { useTranslation } from 'react-i18next';
 import { useLanguageStore } from "../store/languageStore";
-import CountryFlag from "react-native-country-flag";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { i18n } = useTranslation();
   const { selectedLanguage, setSelectedLanguage } = useLanguageStore();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    
+    setIsSidebarOpen(mediaQuery.matches);
+
+    const handleResize = (e: MediaQueryListEvent) => {
+      setIsSidebarOpen(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleResize);
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleResize);
+    };
+  }, []);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLanguage = e.target.value;

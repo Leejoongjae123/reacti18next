@@ -6,25 +6,37 @@ import { useState, useEffect } from "react";
 import { Divider } from "@nextui-org/divider";
 import { useContentsStore } from "../store/contentsStore";
 import { useMenuStore } from "../store/menuStore";
+
+type LanguageContent = {
+  title: string;
+  subtitle: string;
+  subtitleDescription: string;
+};
+
+type DictionaryItem = {
+  title: string;
+  [key: string]: LanguageContent | string;
+};
+
 function SearchList() {
   const { searchKeyword } = useSearchStore();
   const { selectedLanguage } = useLanguageStore();
-  const { selectedContents,setSelectedContents } = useContentsStore();
-  const {selectedMenu,setSelectedMenu} = useMenuStore();
+  const { setSelectedContents } = useContentsStore();
+  const {setSelectedMenu} = useMenuStore();
 
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<typeof textDictionary>([]);
   useEffect(() => {
     if (searchKeyword) {
       const results = textDictionary.filter(
-        (item) =>
-          item[selectedLanguage as keyof typeof item].subtitle.includes(
-            searchKeyword
-          ) ||
-          item[
-            selectedLanguage as keyof typeof item
-          ].subtitleDescription.includes(searchKeyword)
+        (item) => {
+          const content = item[selectedLanguage as keyof typeof item];
+          return typeof content === 'object' && (
+            content.subtitle.includes(searchKeyword) ||
+            content.subtitleDescription.includes(searchKeyword)
+          );
+        }
       );
-      setSearchResults(results);
+      setSearchResults(results as any[]);
     } else {
       setSearchResults([]);
     }
@@ -40,31 +52,34 @@ function SearchList() {
           결과 <span className="text-[#0A54CC]">{searchResults.length}</span>건
         </h1>
       </div>
-      {searchResults.map((item, index) => (
-        <>
-          <div onClick={() => {setSelectedContents('contents');setSelectedMenu(item.title)}} className="w-full h-44 flex flex-col justify-evenly items-center py-5 pointer cursor-pointer hover:bg-[#0A54CC]/5">
+      {searchResults.map((item: DictionaryItem, index) => (
+        <React.Fragment key={`search-result-${index}`}>
+          <div 
+            onClick={() => {setSelectedContents('contents');setSelectedMenu(item.title)}} 
+            className="w-full h-44 flex flex-col justify-evenly items-center py-5 pointer cursor-pointer hover:bg-[#0A54CC]/5"
+          >
             <div className="w-full text-[#808080] text-[16px] ">
-              {item[selectedLanguage as keyof typeof item].title} {">"} {item[selectedLanguage as keyof typeof item].subtitle}
+              {(item[selectedLanguage] as LanguageContent).title} {">"} {(item[selectedLanguage] as LanguageContent).subtitle}
             </div>
             <div className="w-full font-bold text-[#1A1A1A] text-[24px] ">
-              {item[selectedLanguage as keyof typeof item].subtitle.split(searchKeyword).map((part, i, arr) => (
-                <React.Fragment key={i}>
+              {(item[selectedLanguage] as LanguageContent).subtitle.split(searchKeyword).map((part, i, arr) => (
+                <React.Fragment key={`subtitle-${i}`}>
                   {part}
                   {i < arr.length - 1 && <span className="text-[#0A54CC] font-bold">{searchKeyword}</span>}
                 </React.Fragment>
               ))}
             </div>
             <div className="w-full text-[#1A1A1A] text-[16px] ">
-              {item[selectedLanguage as keyof typeof item].subtitleDescription.split(searchKeyword).map((part, i, arr) => (
-                <React.Fragment key={i}>
+              {(item[selectedLanguage] as LanguageContent).subtitleDescription.split(searchKeyword).map((part, i, arr) => (
+                <React.Fragment key={`description-${i}`}>
                   {part}
                   {i < arr.length - 1 && <span className="text-[#0A54CC] font-bold">{searchKeyword}</span>}
                 </React.Fragment>
               ))}
             </div>
           </div>
-          <Divider></Divider>
-        </>
+          <Divider />
+        </React.Fragment>
       ))}
     </div>
   );
