@@ -46,8 +46,8 @@ function SearchList() {
 
   return (
     <div className="px-12 py-14 flex flex-col items-start justify-start">
-      <div className="w-full flex flex-col items-start justify-start border-b border-gray-300 h-[61px]">
-        <h1 className="font-bold text-[24px]">
+      <div className="w-full flex flex-col items-start justify-start border-b border-gray-300 h-full">
+        <h1 className="font-bold text-[24px] mb-6">
           <span className="text-[#0A54CC]">{searchKeyword}</span>에 대한 검색
           결과 <span className="text-[#0A54CC]">{searchResults.length}</span>건
         </h1>
