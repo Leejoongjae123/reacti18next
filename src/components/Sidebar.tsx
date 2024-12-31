@@ -31,7 +31,7 @@ export default function Sidebar({
 
   const { selectedMenu, setSelectedMenu } = useMenuStore();
   const { searchKeyword, setSearchKeyword } = useSearchStore();
-  const { selectedContents, setSelectedContents } = useContentsStore();
+  const { setSelectedContents } = useContentsStore();
 
   // Add handleMenuClick function
   const handleMenuClick = (menuId: string) => {
