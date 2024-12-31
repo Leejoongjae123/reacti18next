@@ -16,6 +16,7 @@ function App() {
         <Helmet>
           <title>User Guide</title>
           <meta name="description" content="UCWORKS SCHOOL LINE User Guide" />
+          <meta property="og:image" content="/ogimage.png" />
         </Helmet>
         <Navbar>
           {selectedContents === "contents" ? <Contents /> : <SearchList />}
