@@ -56,7 +56,7 @@ function SearchList() {
         <React.Fragment key={`search-result-${index}`}>
           <div 
             onClick={() => {setSelectedContents('contents');setSelectedMenu(item.title)}} 
-            className="w-full h-44 flex flex-col justify-evenly items-center py-5 pointer cursor-pointer hover:bg-[#0A54CC]/5"
+            className="w-full h-full flex flex-col justify-evenly items-center py-8 pointer cursor-pointer hover:bg-[#0A54CC]/5 gap-y-3"
           >
             <div className="w-full text-[#808080] text-[16px] ">
               {(item[selectedLanguage] as LanguageContent).title} {">"} {(item[selectedLanguage] as LanguageContent).subtitle}
