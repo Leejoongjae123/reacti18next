@@ -6,10 +6,12 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Select, SelectItem, Image } from "@nextui-org/react";
 import Sidebar from "./Sidebar";
 import logo from "../assets/logo.png";
-import japan from "../assets/japan.png";
-import korea from "../assets/korea.png";
+import japan from "../assets/jp.png";
+import korea from "../assets/kr.png";
+import en from "../assets/en.png";
 import { useTranslation } from 'react-i18next';
 import { useLanguageStore } from "../store/languageStore";
+import CountryFlag from "react-native-country-flag";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -85,6 +87,20 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
                   key="jp"
                 >
                   Japanese
+                </SelectItem>
+                <SelectItem
+                  startContent={
+                    <Image
+                      src={en}
+                      alt="English"
+                      width={20}
+                      height={20}
+                    />
+                  }
+                  value="en"
+                  key="en"
+                >
+                  English
                 </SelectItem>
               </Select>
             </div>

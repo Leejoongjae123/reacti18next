@@ -5,7 +5,7 @@ import { IoSearch } from "react-icons/io5";
 // import { useTranslations } from "next-intl";
 import { useTranslation } from "react-i18next";
 import { useMenuStore } from "../store/menuStore";
-
+import { useSearchStore } from "../store/searchStore";
 export default function Sidebar({
   isSidebarOpen,
   setIsSidebarOpen,
@@ -29,12 +29,16 @@ export default function Sidebar({
   const [isOpen14, setIsOpen14] = useState(true);
 
   const { selectedMenu, setSelectedMenu } = useMenuStore();
+  const { searchKeyword, setSearchKeyword } = useSearchStore();
 
-    // Add handleMenuClick function
-    const handleMenuClick = (menuId: string) => {
-      setSelectedMenu(menuId);
-    };
+  // Add handleMenuClick function
+  const handleMenuClick = (menuId: string) => {
+    setSelectedMenu(menuId);
+  };
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+  };
 
   const handleAllClose = () => {
     // Check if all sections are currently closed
@@ -75,6 +79,8 @@ export default function Sidebar({
 
   const { t } = useTranslation();
 
+  console.log("searchKeyword:", searchKeyword);
+
   return (
     <>
       {isSidebarOpen && (
@@ -103,6 +109,8 @@ export default function Sidebar({
           <Input
             startContent={<IoSearch className="text-gray-500 text-lg" />}
             className="my-4 px-4"
+            value={searchKeyword}
+            onChange={handleSearch}
           />
           <div className="w-full px-4 my-4">
             <Divider className="" />
@@ -139,10 +147,16 @@ export default function Sidebar({
                   isOpen1 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu1_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center ">
+                <div
+                  onClick={() => handleMenuClick("menu1_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center "
+                >
                   {t("menu1_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu1_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu1_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu1_2")}
                 </div>
               </div>
@@ -166,13 +180,22 @@ export default function Sidebar({
                   isOpen2 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu2_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu2_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu2_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu2_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu2_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu2_2")}
                 </div>
-                <div onClick={() => handleMenuClick("menu2_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu2_3")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu2_3")}
                 </div>
               </div>
@@ -196,7 +219,10 @@ export default function Sidebar({
                   isOpen3 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu3_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu3_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu3_1")}
                 </div>
               </div>
@@ -220,10 +246,16 @@ export default function Sidebar({
                   isOpen4 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu4_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu4_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu4_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu4_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu4_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu4_2")}
                 </div>
               </div>
@@ -247,16 +279,28 @@ export default function Sidebar({
                   isOpen5 ? "max-h-60 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu5_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu5_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu5_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu5_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu5_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu5_2")}
                 </div>
-                <div onClick={() => handleMenuClick("menu5_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu5_3")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu5_3")}
                 </div>
-                <div onClick={() => handleMenuClick("menu5_4")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu5_4")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu5_4")}
                 </div>
               </div>
@@ -280,13 +324,22 @@ export default function Sidebar({
                   isOpen6 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu6_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu6_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu6_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu6_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu6_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu6_2")}
                 </div>
-                <div onClick={() => handleMenuClick("menu6_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu6_3")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu6_3")}
                 </div>
               </div>
@@ -310,7 +363,10 @@ export default function Sidebar({
                   isOpen7 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu7_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu7_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu7_1")}
                 </div>
               </div>
@@ -334,16 +390,28 @@ export default function Sidebar({
                   isOpen8 ? "max-h-60 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu8_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu8_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu8_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu8_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu8_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu8_2")}
                 </div>
-                <div onClick={() => handleMenuClick("menu8_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu8_3")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu8_3")}
                 </div>
-                <div onClick={() => handleMenuClick("menu8_4")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu8_4")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu8_4")}
                 </div>
               </div>
@@ -367,7 +435,10 @@ export default function Sidebar({
                   isOpen9 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu9_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu9_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu9_1")}
                 </div>
               </div>
@@ -391,7 +462,10 @@ export default function Sidebar({
                   isOpen10 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu10_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu10_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu10_1")}
                 </div>
               </div>
@@ -415,10 +489,16 @@ export default function Sidebar({
                   isOpen11 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu11_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu11_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu11_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu11_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu11_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu11_2")}
                 </div>
               </div>
@@ -442,7 +522,10 @@ export default function Sidebar({
                   isOpen12 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu12_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu12_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu12_1")}
                 </div>
               </div>
@@ -466,7 +549,10 @@ export default function Sidebar({
                   isOpen13 ? "max-h-40 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu13_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu13_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu13_1")}
                 </div>
               </div>
@@ -490,25 +576,46 @@ export default function Sidebar({
                   isOpen14 ? "max-h-90 " : "max-h-0"
                 }`}
               >
-                <div onClick={() => handleMenuClick("menu14_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_1")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_1")}
                 </div>
-                <div onClick={() => handleMenuClick("menu14_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_2")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_2")}
                 </div>
-                <div onClick={() => handleMenuClick("menu14_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_3")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_3")}
                 </div>
-                <div onClick={() => handleMenuClick("menu14_4")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_4")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_4")}
                 </div>
-                <div onClick={() => handleMenuClick("menu14_5")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_5")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_5")}
                 </div>
-                <div onClick={() => handleMenuClick("menu14_6")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_6")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_6")}
                 </div>
-                <div onClick={() => handleMenuClick("menu14_7")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                <div
+                  onClick={() => handleMenuClick("menu14_7")}
+                  className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center"
+                >
                   {t("menu14_7")}
                 </div>
               </div>
