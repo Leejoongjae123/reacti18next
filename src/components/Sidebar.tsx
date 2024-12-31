@@ -1,13 +1,10 @@
 import { useState } from "react";
-import {
-  Divider,
-  Input,
-  Button,
-} from "@nextui-org/react";
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Divider, Input, Button } from "@nextui-org/react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { IoSearch } from "react-icons/io5";
 // import { useTranslations } from "next-intl";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { useMenuStore } from "../store/menuStore";
 
 export default function Sidebar({
   isSidebarOpen,
@@ -16,7 +13,6 @@ export default function Sidebar({
   isSidebarOpen: boolean;
   setIsSidebarOpen: (isSidebarOpen: boolean) => void;
 }) {
-  
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
   const [isOpen3, setIsOpen3] = useState(true);
@@ -32,11 +28,32 @@ export default function Sidebar({
   const [isOpen13, setIsOpen13] = useState(true);
   const [isOpen14, setIsOpen14] = useState(true);
 
+  const { selectedMenu, setSelectedMenu } = useMenuStore();
+
+    // Add handleMenuClick function
+    const handleMenuClick = (menuId: string) => {
+      setSelectedMenu(menuId);
+    };
+
 
   const handleAllClose = () => {
     // Check if all sections are currently closed
-    const allClosed = !isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6 && !isOpen7 && !isOpen8 && !isOpen9 && !isOpen10 && !isOpen11 && !isOpen12 && !isOpen13 && !isOpen14;
-    
+    const allClosed =
+      !isOpen1 &&
+      !isOpen2 &&
+      !isOpen3 &&
+      !isOpen4 &&
+      !isOpen5 &&
+      !isOpen6 &&
+      !isOpen7 &&
+      !isOpen8 &&
+      !isOpen9 &&
+      !isOpen10 &&
+      !isOpen11 &&
+      !isOpen12 &&
+      !isOpen13 &&
+      !isOpen14;
+
     // Toggle all sections to the opposite state
     setIsOpen1(allClosed ? true : false);
     setIsOpen2(allClosed ? true : false);
@@ -52,13 +69,11 @@ export default function Sidebar({
     setIsOpen12(allClosed ? true : false);
     setIsOpen13(allClosed ? true : false);
     setIsOpen14(allClosed ? true : false);
-  }
+  };
 
   // const t = useTranslations("HomePage");
 
-  const { t} = useTranslation();
-
-
+  const { t } = useTranslation();
 
   return (
     <>
@@ -81,34 +96,55 @@ export default function Sidebar({
       >
         <div className="p-4 w-full h-full overflow-y-auto scrollbar-hide">
           <div className="px-4 flex flex-col gap-y-2">
-          <h2 className="text-xl font-bold ">{t("guide_title")}</h2>
-          <p>1.0</p>
+            <h2 className="text-xl font-bold ">{t("guide_title")}</h2>
+            <p>1.0</p>
           </div>
-          
-          <Input startContent={<IoSearch className="text-gray-500 text-lg" />} className="my-4 px-4" />
+
+          <Input
+            startContent={<IoSearch className="text-gray-500 text-lg" />}
+            className="my-4 px-4"
+          />
           <div className="w-full px-4 my-4">
-          <Divider className="" />
+            <Divider className="" />
           </div>
-          
+
           <Button variant="light" className="text-sm" onClick={handleAllClose}>
-            {(!isOpen1 && !isOpen2 && !isOpen3 && !isOpen4 && !isOpen5 && !isOpen6) 
-              ? t("expand_all") 
+            {!isOpen1 &&
+            !isOpen2 &&
+            !isOpen3 &&
+            !isOpen4 &&
+            !isOpen5 &&
+            !isOpen6
+              ? t("expand_all")
               : t("fold_all")}
           </Button>
-          
+
           <div className="space-y-2 px-4">
             <div>
               <button
                 onClick={() => setIsOpen1(!isOpen1)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen1 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu1")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen1 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu1")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen1 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu1_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu1_2")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen1 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu1_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center ">
+                  {t("menu1_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu1_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu1_2")}
+                </div>
               </div>
             </div>
             <div>
@@ -116,14 +152,29 @@ export default function Sidebar({
                 onClick={() => setIsOpen2(!isOpen2)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen2 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu2")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen2 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu2")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen2 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu2_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu2_2")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu2_3")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen2 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu2_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu2_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu2_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu2_2")}
+                </div>
+                <div onClick={() => handleMenuClick("menu2_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu2_3")}
+                </div>
               </div>
             </div>
             <div>
@@ -131,12 +182,23 @@ export default function Sidebar({
                 onClick={() => setIsOpen3(!isOpen3)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen3 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu3")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen3 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu3")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen3 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu3_1")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen3 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu3_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu3_1")}
+                </div>
               </div>
             </div>
             <div>
@@ -144,13 +206,26 @@ export default function Sidebar({
                 onClick={() => setIsOpen4(!isOpen4)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen4 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu4")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen4 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu4")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen4 ? 'max-h-40 ' : 'max-h-0'}`}>
-
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu4_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu4_2")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen4 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu4_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu4_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu4_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu4_2")}
+                </div>
               </div>
             </div>
             <div>
@@ -158,15 +233,32 @@ export default function Sidebar({
                 onClick={() => setIsOpen5(!isOpen5)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen1 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu5")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen1 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu5")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen5 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu5_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu5_2")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu5_3")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu5_4")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen5 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu5_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu5_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu5_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu5_2")}
+                </div>
+                <div onClick={() => handleMenuClick("menu5_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu5_3")}
+                </div>
+                <div onClick={() => handleMenuClick("menu5_4")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu5_4")}
+                </div>
               </div>
             </div>
             <div>
@@ -174,14 +266,29 @@ export default function Sidebar({
                 onClick={() => setIsOpen6(!isOpen6)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen6 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu6")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen6 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu6")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen6 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu6_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu6_2")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu6_3")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen6 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu6_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu6_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu6_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu6_2")}
+                </div>
+                <div onClick={() => handleMenuClick("menu6_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu6_3")}
+                </div>
               </div>
             </div>
             <div>
@@ -189,24 +296,56 @@ export default function Sidebar({
                 onClick={() => setIsOpen7(!isOpen7)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen7 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu7")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen7 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu7")}
+                </span>
               </button>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen7 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu7_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu7_1")}
+                </div>
+              </div>
             </div>
             <div>
               <button
                 onClick={() => setIsOpen8(!isOpen8)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen8 ? 'transform rotate-180' : ''}`} />
-                <span className="text-medium flex-grow ml-2 font-bold">{t("menu8")}</span>
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen8 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu8")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen6 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_2")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_3")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu8_4")}</div>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen8 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu8_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu8_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu8_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu8_2")}
+                </div>
+                <div onClick={() => handleMenuClick("menu8_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu8_3")}
+                </div>
+                <div onClick={() => handleMenuClick("menu8_4")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu8_4")}
+                </div>
               </div>
             </div>
             <div>
@@ -214,39 +353,169 @@ export default function Sidebar({
                 onClick={() => setIsOpen9(!isOpen9)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen9 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu9")}
+                </span>
               </button>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen9 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu9_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu9_1")}
+                </div>
+              </div>
             </div>
             <div>
               <button
                 onClick={() => setIsOpen10(!isOpen10)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen10 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu10")}
+                </span>
               </button>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen10 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu10_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu10_1")}
+                </div>
+              </div>
             </div>
             <div>
               <button
                 onClick={() => setIsOpen11(!isOpen11)}
                 className="flex justify-between items-center w-full py-2 text-left"
               >
-                
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen11 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu11")}
+                </span>
               </button>
-              <div className={`pl-4 space-y-4 overflow-hidden transition-all ${isOpen6 ? 'max-h-40 ' : 'max-h-0'}`}>
-                
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu11_1")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu11_2")}</div>
-                <div className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">{t("menu11_3")}</div>
-                
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen11 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu11_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu11_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu11_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu11_2")}
+                </div>
               </div>
             </div>
-            
-
+            <div>
+              <button
+                onClick={() => setIsOpen12(!isOpen12)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen12 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu12")}
+                </span>
+              </button>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen12 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu12_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu12_1")}
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen13(!isOpen13)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen13 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu13")}
+                </span>
+              </button>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen13 ? "max-h-40 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu13_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu13_1")}
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                onClick={() => setIsOpen14(!isOpen14)}
+                className="flex justify-between items-center w-full py-2 text-left"
+              >
+                <ChevronDownIcon
+                  className={`w-4 h-4 transition-transform ${
+                    isOpen14 ? "transform rotate-180" : ""
+                  }`}
+                />
+                <span className="text-medium flex-grow ml-2 font-bold">
+                  {t("menu14")}
+                </span>
+              </button>
+              <div
+                className={`pl-4 space-y-4 overflow-hidden transition-all ${
+                  isOpen14 ? "max-h-90 " : "max-h-0"
+                }`}
+              >
+                <div onClick={() => handleMenuClick("menu14_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_1")}
+                </div>
+                <div onClick={() => handleMenuClick("menu14_2")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_2")}
+                </div>
+                <div onClick={() => handleMenuClick("menu14_3")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_3")}
+                </div>
+                <div onClick={() => handleMenuClick("menu14_4")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_4")}
+                </div>
+                <div onClick={() => handleMenuClick("menu14_5")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_5")}
+                </div>
+                <div onClick={() => handleMenuClick("menu14_6")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_6")}
+                </div>
+                <div onClick={() => handleMenuClick("menu14_7")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
+                  {t("menu14_7")}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </aside>
     </>
   );
 }
-
-
