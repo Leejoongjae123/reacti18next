@@ -9,11 +9,12 @@ import logo from "../assets/logo.png";
 import japan from "../assets/japan.png";
 import korea from "../assets/korea.png";
 import { useTranslation } from 'react-i18next';
+import { useLanguageStore } from "../store/languageStore";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState("kr");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { i18n } = useTranslation();
+  const { selectedLanguage, setSelectedLanguage } = useLanguageStore();
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLanguage = e.target.value;

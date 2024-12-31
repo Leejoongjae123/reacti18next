@@ -244,7 +244,7 @@ export default function Sidebar({
               </button>
               <div
                 className={`pl-4 space-y-4 overflow-hidden transition-all ${
-                  isOpen5 ? "max-h-40 " : "max-h-0"
+                  isOpen5 ? "max-h-60 " : "max-h-0"
                 }`}
               >
                 <div onClick={() => handleMenuClick("menu5_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
@@ -331,7 +331,7 @@ export default function Sidebar({
               </button>
               <div
                 className={`pl-4 space-y-4 overflow-hidden transition-all ${
-                  isOpen8 ? "max-h-40 " : "max-h-0"
+                  isOpen8 ? "max-h-60 " : "max-h-0"
                 }`}
               >
                 <div onClick={() => handleMenuClick("menu8_1")} className="px-8 h-10 hover:text-[#1448CC] hover:bg-[#E0ECFF] rounded-lg flex items-center">
