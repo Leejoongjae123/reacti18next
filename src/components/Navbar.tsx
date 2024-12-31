@@ -112,7 +112,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <main className="flex-grow h-full overflow-y-auto">{children}</main>
+        <main className="flex-1 h-full overflow-y-auto">{children}</main>
       </div>
     </div>
   );

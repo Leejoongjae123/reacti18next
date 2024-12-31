@@ -6,6 +6,6 @@ interface MenuState {
 }
 
 export const useMenuStore = create<MenuState>((set: any) => ({
-  selectedMenu: "",
+  selectedMenu: "menu1_1",
   setSelectedMenu: (menu: any) => set({ selectedMenu: menu }),
 }));
