@@ -102,7 +102,7 @@ export default function Sidebar({
         ${isSidebarOpen ? "w-[312px] md:w-[312px]" : "w-0"}
         lg:block
         ${isSidebarOpen ? "z-30 lg:z-0" : ""}
-        overflow-hidden
+        overflow-y-auto scrollbar-hide
       `}
       >
         <div className="p-4 w-full h-full">
@@ -673,10 +673,10 @@ export default function Sidebar({
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="pb-20">
                 <button
                   onClick={() => setIsOpen14(!isOpen14)}
-                  className="flex justify-between items-center w-full py-2 text-left"
+                  className="flex justify-between items-center w-full py-2 text-left h-16"
                 >
                   <ChevronDownIcon
                     className={`w-4 h-4 transition-transform ${
@@ -688,13 +688,13 @@ export default function Sidebar({
                   </span>
                 </button>
                 <div
-                  className={` overflow-hidden transition-all ${
-                    isOpen14 ? "max-h-90 " : "max-h-0"
+                  className={`overflow-hidden transition-all ${
+                    isOpen14 ? "max-h-80" : "max-h-0"
                   }`}
                 >
                   <div
                     onClick={() => handleMenuClick("menu14_1")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_1"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
@@ -704,7 +704,7 @@ export default function Sidebar({
                   </div>
                   <div
                     onClick={() => handleMenuClick("menu14_2")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_2"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
@@ -714,7 +714,7 @@ export default function Sidebar({
                   </div>
                   <div
                     onClick={() => handleMenuClick("menu14_3")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_3"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
@@ -724,7 +724,7 @@ export default function Sidebar({
                   </div>
                   <div
                     onClick={() => handleMenuClick("menu14_4")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_4"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
@@ -734,7 +734,7 @@ export default function Sidebar({
                   </div>
                   <div
                     onClick={() => handleMenuClick("menu14_5")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_5"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
@@ -744,7 +744,7 @@ export default function Sidebar({
                   </div>
                   <div
                     onClick={() => handleMenuClick("menu14_6")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_6"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
@@ -754,7 +754,7 @@ export default function Sidebar({
                   </div>
                   <div
                     onClick={() => handleMenuClick("menu14_7")}
-                    className={` pl-10 h-10 rounded-lg flex items-center ${
+                    className={`pl-10 h-10 rounded-lg flex items-center ${
                       selectedMenu === "menu14_7"
                         ? "text-[#1448CC] bg-[#E0ECFF]"
                         : "hover:text-[#1448CC] hover:bg-[#E0ECFF]"
