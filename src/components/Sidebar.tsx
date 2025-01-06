@@ -676,7 +676,7 @@ export default function Sidebar({
               <div className="pb-20">
                 <button
                   onClick={() => setIsOpen14(!isOpen14)}
-                  className="flex justify-between items-center w-full py-2 text-left h-16"
+                  className="flex justify-between items-center w-full py-2 text-left"
                 >
                   <ChevronDownIcon
                     className={`w-4 h-4 transition-transform ${
