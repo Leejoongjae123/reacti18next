@@ -43,7 +43,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="w-full h-screen">
-      <nav className="white p-4 border-b border-gray-200">
+      <nav className="white py-1 border-b border-gray-200">
         <div className="mx-auto flex justify-between items-center px-5">
           <div className="flex items-center justify-center gap-x-2">
             <button
@@ -53,7 +53,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
               <RxHamburgerMenu size={24} />
             </button>
             <div className="flex items-center justify-center">
-              <img src={logo} alt="logo" className="w-auto h-10"/>
+              <img src={logo} alt="logo" className="w-auto h-full"/>
             </div>
           </div>
 

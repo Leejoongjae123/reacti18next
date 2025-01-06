@@ -14,7 +14,7 @@ function Contents() {
   console.log('selectedMenu:',selectedMenu)
   return (
     <div className='bg-white w-full flex flex-col h-full '> 
-      <div className="bg-[#F2F2F2] w-full py-8 md:py-14 px-12">
+      <div className="bg-[#F2F2F2] w-full pt-10 pb-8 px-12">
         <h1 className="text-[24px] font-bold mb-2 text-[#0A54CC]">
           {typeof languageContent === 'object' ? languageContent?.title : languageContent}
         </h1>
@@ -23,7 +23,7 @@ function Contents() {
         </p>
         
       </div>
-      <div className="bg-white w-full py-6 md:py-10 px-12">
+      <div className="bg-white w-full py-6 px-12">
         <h2 className="text-[20px] font-bold mb-2">
           {typeof languageContent === 'object' ? languageContent?.subtitle : ''}
         </h2>
